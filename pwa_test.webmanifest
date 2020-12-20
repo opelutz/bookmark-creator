@@ -11,5 +11,5 @@
     ],
     "name": "Awesome fox pictures",
     "short_name": "Foxes",
-    "start_url": "bookmark-creator/index.html"
+    "start_url": "/bookmark-creator/index.html"
   }
