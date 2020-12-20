@@ -1,0 +1,15 @@
+{
+    "background_color": "purple",
+    "description": "Test PWA",
+    "display": "fullscreen",
+    "icons": [
+      {
+        "src": "zoom.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ],
+    "name": "Awesome fox pictures",
+    "short_name": "Foxes",
+    "start_url": "https://opelutz.github.io/bookmark-creator/"
+  }
