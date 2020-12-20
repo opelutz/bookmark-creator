@@ -5,7 +5,7 @@
 	<meta content="text/html; charset=utf-8" />
 	<link rel="manifest" href="manifest.webmanifest">
 	<style>
-		#bookmark-this {
+		.add-button {
 			padding: 5px 10px;
 			background-color: #f0ad4e;
 			border: 1px solid #eea236;
@@ -22,13 +22,13 @@
 			user-select: none;
 		}
 
-		#bookmark-this:hover {
+		.add-button:hover {
 			background-color: #ec971f;
 			border: 1px solid #d58512;
 			text-decoration: none;
 		}
 
-		#bookmark-this:active {
+		.add-button:active {
 			background-color: #ec971f;
 			border: 1px solid #d58512;
 			-webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
@@ -41,11 +41,38 @@
 	<h1>Bookmark Beispiel</h1>
 
 	<h1>Geht das auf deinem iPhone? :-)</h1>
-	<a id="bookmark-this" href="https://opelutz.github.io/test-website.github.io/" title="Bookmark This Page">Bookmark
-		This Page</a>
-		<p id="addBookmarkContainer"></p>
+	<button class="add-button">Bookmark us!</button>
+	<p id="addBookmarkContainer"></p>
 
 	<script type="text/javascript">
+		let deferredPrompt;
+		const addBtn = document.querySelector('.add-button');
+		addBtn.style.display = 'none';
+
+		window.addEventListener('beforeinstallprompt', (e) => {
+			// Prevent Chrome 67 and earlier from automatically showing the prompt
+			e.preventDefault();
+			// Stash the event so it can be triggered later.
+			deferredPrompt = e;
+			// Update UI to notify the user they can add to home screen
+			addBtn.style.display = 'block';
+
+			addBtn.addEventListener('click', (e) => {
+				// hide our user interface that shows our A2HS button
+				addBtn.style.display = 'none';
+				// Show the prompt
+				deferredPrompt.prompt();
+				// Wait for the user to respond to the prompt
+				deferredPrompt.userChoice.then((choiceResult) => {
+					if (choiceResult.outcome === 'accepted') {
+						console.log('User accepted the A2HS prompt');
+					} else {
+						console.log('User dismissed the A2HS prompt');
+					}
+					deferredPrompt = null;
+				});
+			});
+		});
 	</script>
 </body>
 
