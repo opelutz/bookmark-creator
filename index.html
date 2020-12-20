@@ -1,79 +1,18 @@
+<!DOCTYPE html>
 <html>
-
-<head>
+  <head>
+    <meta charset="utf-8">
 	<title>Bookmark Creator Example</title>
-	<meta content="text/html; charset=utf-8" />
+	
+	<link href="style.css" rel="stylesheet">
+    <script src="index.js" defer></script>
 	<link rel="manifest" href="pwa_test.webmanifest">
-	<style>
-		.add-button {
-			padding: 5px 10px;
-			background-color: #f0ad4e;
-			border: 1px solid #eea236;
-			border-radius: 4px;
-			font-size: 12px;
-			color: #fff;
-			text-decoration: none;
-			text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
-			-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
-		}
-
-		.add-button:hover {
-			background-color: #ec971f;
-			border: 1px solid #d58512;
-			text-decoration: none;
-		}
-
-		.add-button:active {
-			background-color: #ec971f;
-			border: 1px solid #d58512;
-			-webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
-			box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
-		}
-	</style>
-</head>
-
-<body>
+  </head>
+  <body>
 	<h1>Bookmark Beispiel</h1>
 
 	<h1>Geht das auf deinem iPhone? :-)</h1>
 	<button class="add-button">Bookmark us!</button>
-	<p id="addBookmarkContainer"></p>
-
-	<script type="text/javascript">
-		let deferredPrompt;
-		const addBtn = document.querySelector('.add-button');
-		addBtn.style.display = 'none';
-
-		window.addEventListener('beforeinstallprompt', (e) => {
-			// Prevent Chrome 67 and earlier from automatically showing the prompt
-			e.preventDefault();
-			// Stash the event so it can be triggered later.
-			deferredPrompt = e;
-			// Update UI to notify the user they can add to home screen
-			addBtn.style.display = 'block';
-
-			addBtn.addEventListener('click', (e) => {
-				// hide our user interface that shows our A2HS button
-				addBtn.style.display = 'none';
-				// Show the prompt
-				deferredPrompt.prompt();
-				// Wait for the user to respond to the prompt
-				deferredPrompt.userChoice.then((choiceResult) => {
-					if (choiceResult.outcome === 'accepted') {
-						console.log('User accepted the A2HS prompt');
-					} else {
-						console.log('User dismissed the A2HS prompt');
-					}
-					deferredPrompt = null;
-				});
-			});
-		});
-	</script>
-</body>
-
+  </body>
 </html>
+<html>
